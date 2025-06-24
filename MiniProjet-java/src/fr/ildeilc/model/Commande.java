@@ -7,28 +7,23 @@ import java.util.List;
 
 /**
  * Représente une commande client.
+ * 
+ * Cette classe gère les lignes de commande, le statut de la commande, et permet de générer des factures et des bons de livraison.
  */
 public class Commande {
-    /**
-     * Statut d'une commande.
-     */
     public enum Status { EN_COURS, EN_ATTENTE_STOCK, LIVREE, PAYEE }
 
-    /** Identifiant de la commande */
     private final int id;
-    /** Client ayant passé la commande */
     private final Client client;
-    /** Date de la commande */
     private final Date date;
-    /** Lignes de la commande */
     private final List<LigneCommande> lignes;
-    /** Statut de la commande */
     private Status status;
 
     /**
-     * Construit une commande pour un client donné.
-     * @param id identifiant de la commande
-     * @param client client associé
+     * Constructeur pour créer une nouvelle commande.
+     * 
+     * @param id L'identifiant de la commande.
+     * @param client Le client associé à la commande.
      */
     public Commande(int id, Client client) {
         this.id = id;
@@ -38,39 +33,16 @@ public class Commande {
         this.status = Status.EN_COURS;
     }
 
-    /**
-     * Retourne l'identifiant de la commande.
-     * @return id
-     */
     public int getId() { return id; }
-
-    /**
-     * Retourne le client associé à la commande.
-     * @return client
-     */
     public Client getClient() { return client; }
-
-    /**
-     * Retourne la date de la commande.
-     * @return date
-     */
     public Date getDate() { return date; }
-
-    /**
-     * Retourne la liste des lignes de commande.
-     * @return lignes
-     */
     public List<LigneCommande> getLignes() { return lignes; }
-
-    /**
-     * Retourne le statut de la commande.
-     * @return statut
-     */
     public Status getStatus() { return status; }
 
     /**
      * Calcule le total de la commande.
-     * @return montant total
+     * 
+     * @return Le montant total de la commande.
      */
     public double getTotal() {
         return lignes.stream().mapToDouble(LigneCommande::getTotal).sum();
@@ -78,9 +50,9 @@ public class Commande {
 
     /**
      * Ajoute une ligne à la commande.
-     * @param p produit
-     * @param q quantité
-     * @throws IllegalStateException si le stock est insuffisant
+     * 
+     * @param p Le produit à ajouter.
+     * @param q La quantité à ajouter.
      */
     public void ajouterLigne(Produit p, int q) {
         if (p.getQuantiteEnStock() < q) {
@@ -94,8 +66,9 @@ public class Commande {
 
     /**
      * Génère un bon de livraison pour la commande.
-     * @return bon de livraison
-     * @throws IllegalStateException si le stock est insuffisant
+     * 
+     * @return Un bon de livraison associé à la commande.
+     * @throws IllegalStateException Si le stock est insuffisant pour la livraison.
      */
     public BonLivraison genererBonLivraison() {
         if (status == Status.EN_ATTENTE_STOCK) {
@@ -107,17 +80,14 @@ public class Commande {
 
     /**
      * Génère une facture pour la commande.
-     * @return facture
+     * 
+     * @return Une facture associée à la commande.
      */
     public Facture genererFacture() {
         status = Status.PAYEE;
         return new Facture(this);
     }
 
-    /**
-     * Retourne une représentation textuelle de la commande.
-     * @return chaîne descriptive
-     */
     @Override
     public String toString() {
         // Format de date : jour/mois/année

@@ -1,3 +1,4 @@
+// filepath: /Users/quentin/Documents/limayrac/BSI/java/MiniProjet-java/src/fr/ildeilc/view/panels/CommandePanel.java
 package fr.ildeilc.view.panels;
 
 import fr.ildeilc.controller.AppController;
@@ -7,7 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Panel pour la gestion des commandes (création, ajout de lignes).
+ * CommandePanel est un panneau qui permet de gérer les commandes.
+ * Il permet d'ajouter des produits à une commande en cours et de créer de nouvelles commandes.
  */
 public class CommandePanel extends JPanel {
     private final AppController ctrl;
@@ -16,8 +18,9 @@ public class CommandePanel extends JPanel {
     private final DefaultListModel<LigneCommande> model;
 
     /**
-     * Construit le panel de gestion des commandes.
-     * @param ctrl contrôleur principal
+     * Constructeur de CommandePanel.
+     * 
+     * @param ctrl Le contrôleur principal de l'application.
      */
     public CommandePanel(AppController ctrl) {
         this.ctrl = ctrl;
@@ -103,7 +106,7 @@ public class CommandePanel extends JPanel {
     }
 
     /**
-     * Rafraîchit la liste des produits dans la comboBox.
+     * Rafraîchit la liste des produits disponibles dans le JComboBox.
      */
     private void refreshProduits() {
         cbProduits.removeAllItems();
@@ -113,7 +116,7 @@ public class CommandePanel extends JPanel {
     }
 
     /**
-     * Rafraîchit la liste des lignes de la commande courante.
+     * Rafraîchit la liste des lignes de commande affichées.
      */
     private void refreshLines() {
         model.clear();

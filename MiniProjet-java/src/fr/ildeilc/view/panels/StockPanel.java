@@ -1,3 +1,5 @@
+// filepath: /Users/quentin/Documents/limayrac/BSI/java/MiniProjet-java/src/fr/ildeilc/view/panels/StockPanel.java
+
 package fr.ildeilc.view.panels;
 
 import fr.ildeilc.controller.AppController;
@@ -8,7 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Panel pour la gestion du stock (création, modification, suppression de produits).
+ * StockPanel est un panneau qui permet de gérer le stock de produits.
+ * Il offre des fonctionnalités pour ajouter, mettre à jour et supprimer des produits.
+ * 
+ * Ce panneau affiche une liste des produits disponibles et fournit un formulaire
+ * pour modifier les détails d'un produit sélectionné ou pour créer un nouveau produit.
+ * 
+ * Les actions effectuées dans ce panneau sont reflétées dans le modèle de données
+ * et les changements de stock sont notifiés aux autres composants de l'application.
  */
 public class StockPanel extends JPanel implements StockChangeListener {
     private final AppController ctrl;
@@ -20,8 +29,9 @@ public class StockPanel extends JPanel implements StockChangeListener {
     private final JTextField tfNewNom, tfNewPrix, tfNewQuantite;
 
     /**
-     * Construit le panel de gestion du stock.
-     * @param ctrl contrôleur principal
+     * Constructeur de StockPanel.
+     * 
+     * @param ctrl Le contrôleur de l'application qui gère les interactions avec le modèle.
      */
     public StockPanel(AppController ctrl) {
         this.ctrl = ctrl;
@@ -96,7 +106,7 @@ public class StockPanel extends JPanel implements StockChangeListener {
     }
 
     /**
-     * Rafraîchit la liste des produits affichés.
+     * Rafraîchit la liste des produits et les champs de saisie.
      */
     private void refresh() {
         model.clear();
@@ -109,7 +119,7 @@ public class StockPanel extends JPanel implements StockChangeListener {
     }
 
     /**
-     * Remplit les champs du formulaire à partir du produit sélectionné.
+     * Remplit les champs de saisie avec les informations du produit sélectionné.
      */
     private void remplirChampsDepuisProduit() {
         Produit p = (Produit) cbProduits.getSelectedItem();
@@ -121,7 +131,7 @@ public class StockPanel extends JPanel implements StockChangeListener {
     }
 
     /**
-     * Met à jour le produit sélectionné avec les valeurs saisies.
+     * Met à jour le produit sélectionné avec les nouvelles informations saisies.
      */
     private void mettreAJourProduit() {
         Produit p = (Produit) cbProduits.getSelectedItem();
@@ -179,7 +189,7 @@ public class StockPanel extends JPanel implements StockChangeListener {
     }
 
     /**
-     * Crée un nouveau produit à partir des champs saisis.
+     * Crée un nouveau produit avec les informations saisies.
      */
     private void creerProduit() {
         String nom = tfNewNom.getText().trim();
@@ -218,7 +228,7 @@ public class StockPanel extends JPanel implements StockChangeListener {
     }
 
     /**
-     * Méthode appelée lors d'un changement de stock.
+     * Notifie que le stock a changé et rafraîchit l'affichage.
      */
     @Override
     public void stockChanged() {

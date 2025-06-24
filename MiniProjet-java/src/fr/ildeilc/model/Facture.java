@@ -1,22 +1,25 @@
 package fr.ildeilc.model;
 
 /**
- * Génère une facture pour une commande.
+ * Génère une facture à partir d'une commande.
+ * Cette classe contient les détails de la commande associée et 
+ * fournit une méthode pour imprimer la facture.
  */
 public class Facture {
-    /** Commande associée à la facture */
     private final Commande commande;
 
     /**
-     * Construit une facture pour la commande donnée.
-     * @param commande la commande concernée
+     * Constructeur de la classe Facture.
+     * 
+     * @param commande La commande associée à cette facture.
      */
     public Facture(Commande commande) {
         this.commande = commande;
     }
 
     /**
-     * Imprime la facture sur la sortie standard.
+     * Imprime les détails de la facture.
+     * Affiche le numéro de commande, le nom du client et le total de la commande.
      */
     public void imprimer() {
         System.out.println("\n--- FACTURE ---");

@@ -7,10 +7,17 @@ import fr.ildeilc.model.Commande;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Panel pour la génération des bons de livraison.
+ */
 public class LivraisonPanel extends JPanel implements CommandeChangeListener {
     private final AppController ctrl;
     private final JComboBox<Commande> cbCommandes;
 
+    /**
+     * Construit le panel de génération de bons de livraison.
+     * @param ctrl contrôleur principal
+     */
     public LivraisonPanel(AppController ctrl) {
         this.ctrl = ctrl;
         setLayout(new BorderLayout());
@@ -35,6 +42,9 @@ public class LivraisonPanel extends JPanel implements CommandeChangeListener {
         add(btnGen, BorderLayout.CENTER);
     }
 
+    /**
+     * Rafraîchit la liste des commandes.
+     */
     private void refresh() {
         cbCommandes.removeAllItems();
         for (Commande c : ctrl.getCommandes()) {
@@ -42,6 +52,9 @@ public class LivraisonPanel extends JPanel implements CommandeChangeListener {
         }
     }
 
+    /**
+     * Méthode appelée lors d'un changement de commandes.
+     */
     @Override
     public void commandesChanged() {
         refresh();

@@ -4,14 +4,16 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Gère le stock de produits avec persistance CSV.
+ * Gère le stock avec persistance CSV.
+ * Cette classe permet d'ajouter des produits, de les chercher par ID,
+ * et de charger ou sauvegarder le stock à partir d'un fichier CSV.
  */
 public class Stock {
-    /** Liste des produits en stock */
     private final List<Produit> produits;
 
     /**
-     * Construit un stock vide.
+     * Constructeur de la classe Stock.
+     * Initialise la liste des produits.
      */
     public Stock() {
         produits = new ArrayList<>();
@@ -19,24 +21,27 @@ public class Stock {
 
     /**
      * Ajoute un produit au stock.
-     * @param p produit à ajouter
+     *
+     * @param p Le produit à ajouter.
      */
     public void ajouterProduit(Produit p) {
         produits.add(p);
     }
 
     /**
-     * Recherche un produit par son identifiant.
-     * @param id identifiant du produit
-     * @return produit trouvé ou null
+     * Cherche un produit par son ID.
+     *
+     * @param id L'ID du produit à chercher.
+     * @return Le produit correspondant à l'ID, ou null si non trouvé.
      */
     public Produit chercherParId(int id) {
         return produits.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
     }
 
     /**
-     * Retourne la liste des produits en stock.
-     * @return liste des produits
+     * Retourne la liste des produits dans le stock.
+     *
+     * @return La liste des produits.
      */
     public List<Produit> getProduits() {
         return produits;
@@ -44,8 +49,9 @@ public class Stock {
 
     /**
      * Sauvegarde le stock dans un fichier CSV.
-     * @param path chemin du fichier
-     * @throws IOException en cas d'erreur d'écriture
+     *
+     * @param path Le chemin du fichier CSV.
+     * @throws IOException Si une erreur se produit lors de l'écriture dans le fichier.
      */
     public void saveCsv(String path) throws IOException {
         try (PrintWriter pw = new PrintWriter(new FileWriter(path))) {
@@ -54,9 +60,10 @@ public class Stock {
     }
 
     /**
-     * Charge le stock depuis un fichier CSV.
-     * @param path chemin du fichier
-     * @throws IOException en cas d'erreur de lecture
+     * Charge le stock à partir d'un fichier CSV.
+     *
+     * @param path Le chemin du fichier CSV.
+     * @throws IOException Si une erreur se produit lors de la lecture du fichier.
      */
     public void loadCsv(String path) throws IOException {
         produits.clear();
